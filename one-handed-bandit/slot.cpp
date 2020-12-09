@@ -2,11 +2,12 @@
 #include <string>
 #include <stdlib.h>     
 #include <time.h>
+#include "slot.h"
 using namespace std;
 
 
 //funktio varmistaa, ettei nimess‰ ole numeroita
-std:: string NameCheck()
+std:: string NimiTarkistus()
 {
 	string name1;
 	int i = 0;
@@ -31,7 +32,7 @@ std:: string NameCheck()
 }
 
 
-//funktio tarkistaa panoksen validiteetin.
+//funktio tarkistaa ettei asetettu panos ole saldoa suurempi.
 int SaldoTarkistus(int saldo, int panos)
 {
 	if (panos > saldo) {
@@ -45,24 +46,23 @@ int SaldoTarkistus(int saldo, int panos)
 	return(panos);
 }
 //Funktiolla annetaan k‰ytt‰j‰lle mahdollisuus valita jatkaako pelaamista vaiko lopettaako.       
-int replay(int balance) {
-	cout << "\n\nSyˆt‰ '1' pelataksesi uudelleen\nSyˆt‰ 2 lopettaaksesi." << endl;
+int PelinJatkaminen(int balance) {
+	cout << "\n\nSyˆt‰ '1' pelataksesi uudelleen\nSyˆt‰ jotain muuta lopettaaksesi." << endl;
 	int x = 3;
-	while (x != 1 && x != 2)
+	while (x != 1 && x != 2) {
 		cin >> x;
-	if (x == 1) {
-		cout << "\n\n\n";
-		return(1);
-	}
-	if (x == 2) {
+		if (x == 1) {
+			cout << "\n\n\n";
+			return(1);
+		}
+		else
 		cout << "\nKiitos pelaamisesta, tervetuloa uudelleen\nLoppusaldosi: " << balance << "\n";
 		exit(0);
 	}
 }
 
-
 //Funktio tarkasta onko syˆte numeraalinen, sek‰ k‰ytt‰j‰n t‰ysi-ik‰isyyden
-int Agetest() {
+int Ik‰Tarkistus() {
 	char age[10];
 	int age1, len;
 	int x = 1;
@@ -92,7 +92,7 @@ int Agetest() {
 	return(age1);
 }
 //Funktiossa tarkistetaan asiakkaan nimi, ik‰ ja saldo. Funktio palauttaa saldon main-funktioon.
-int CustomerValidation() {
+int AsiakkaanTarkistus() {
 	struct Customer {
 		string name;
 		int age, deposit;
@@ -102,9 +102,9 @@ int CustomerValidation() {
 
 	cout << "\nTervetuloa pelaamaan! T‰yt‰th‰n tietosi ennen pelaamista." << endl;
 	cout << "Etunimi: ";
-	name1 = NameCheck();
+	name1 = NimiTarkistus();
 	cout << "Ik‰: ";
-	age1 = Agetest();
+	age1 = Ik‰Tarkistus();
 	cout << "Talletettava summa, jonka haluat pelata: ";
 	cin >> deposit1;
 	struct Customer cust = { name1, age1, deposit1 };
@@ -113,7 +113,7 @@ int CustomerValidation() {
 }
 
 //funktio toimii peliautomaattina, pit‰‰ kirjaa asiakkaan saldosta, ja palauttaa lopussa saldon. 
-int slot(int balance, int panos) {
+int Pelikone(int balance, int panos) {
 	cout << "Syˆt‰ '1' aloittaaksesi pelaamisen.\nSyˆt‰ jotain muuta poistuaksesi pelaamatta.\n";
 
 	int input;
@@ -159,7 +159,7 @@ int slot(int balance, int panos) {
 			cout << "Pelivarasi loppuivat, kiitos pelaamisesta! " << endl;
 			return(balance);
 		}
-		input = replay(balance);
+		input = PelinJatkaminen(balance);
 	}
 	return(balance);
 }
@@ -169,4 +169,18 @@ int Logo() {
 	cout << "PELAA VASTUULLISESTI\n\n\nSaat apua peliongelmiisi osoitteesta: peluuri.fi\n\n\n";
 
 	return(0);
+}
+
+
+//funktio palauttaa arvon sen mukaan, onko parametrin‰ annettu muuttuja numero. 
+bool NumeroTarkistus(int luku) {
+	char buffer[33];
+	int i = 0;
+	_itoa_s(luku, buffer, 10);
+	int len = strlen(buffer);
+	for (int i = 0; i < len; i++) {
+		if (!(isdigit(buffer[i])));
+		return(false);
+	}
+	return(true);
 }

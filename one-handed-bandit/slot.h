@@ -1,11 +1,10 @@
 #pragma once
-#pragma once
-#pragma once
 
-int CustomerValidation();
-int slot(int saldo, int panos);
-int replay(int balance);
-int Agetest(int age);
+int AsiakkaanTarkistus();
+int Pelikone(int saldo, int panos);
+int PelinJatkaminen(int balance);
+int Ik‰Tarkistus(int age);
 int Logo();
 int SaldoTarkistus(int balance, int panos);
 //string NameCheck();
+bool NumeroTarkistus(int luku);

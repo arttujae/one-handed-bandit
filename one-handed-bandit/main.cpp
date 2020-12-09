@@ -7,11 +7,10 @@ int main() {
 	Logo();
 
 	int balance, panos, loppusaldo;
-	balance = CustomerValidation();
+	balance = AsiakkaanTarkistus();
 	cout << "Aseta panos: ";
 	cin >> panos;
-	loppusaldo = slot(balance, panos);
-
+	loppusaldo = Pelikone(balance, panos);
 	Logo();
 	return (0);
 }
