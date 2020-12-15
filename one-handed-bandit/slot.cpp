@@ -61,7 +61,7 @@ int PelinJatkaminen(int balance) {
 	}
 }
 
-//Funktio tarkasta onko syöte numeraalinen, sekä käyttäjän täysi-ikäisyyden
+//Funktio tarkastaa onko syöte numeraalinen, sekä varmistaa käyttäjän täysi-ikäisyyden
 int IkäTarkistus() {
 	char age[10];
 	int age1, len;
@@ -69,6 +69,7 @@ int IkäTarkistus() {
 	int i = 0;
 	while (x == 1) {
 		cin >> age;
+		age1 = atoi(age);
 		len = strlen(age);
 		while (isdigit(age[i])) {
 			i++;
@@ -76,10 +77,13 @@ int IkäTarkistus() {
 				x++;
 			}
 		}
-		if (x == 1)::cout << "Voit syöttää vai numeroita.\n";
+		if (x == 1)::cout << "Voit syöttää vain numeroita.\nSyötä ikä uudelleen: ";
 		i = 0;
+		
+			
 	}
-	age1 = atoi(age);
+	
+	
 	try {
 		if (age1 < 18) {
 			throw(age1);
@@ -121,11 +125,11 @@ int Pelikone(int balance, int panos) {
 	while (input == 1) {	 	                                        //while-loopilla pysytään pelissä käyttäjän tahdon mukaan.
 		panos = SaldoTarkistus(balance, panos);
 		char first, second, third;
-		char symb1[] = "WWWWWAAAAAAAAAAALLLLLLLLLLLLLLLLLLLLXXXX";         //pelikoneen symbolit arvotaan stringistä, muuttamalla symboleiden suhteita, voidaan muuttaa pelikoneen palautusprosenttia
+		char symb1[] = "WWWWWAAAAAAAAAAALLLLLLLLLLLLLLLLLLLLXXXX????";         //pelikoneen symbolit arvotaan stringistä, muuttamalla symboleiden suhteita, voidaan muuttaa pelikoneen palautusprosenttia
 		srand(time(0));
-		first = symb1[rand() % 37];
-		second = symb1[rand() % 37];
-		third = symb1[rand() % 37];
+		first = symb1[rand() % 41];
+		second = symb1[rand() % 41];
+		third = symb1[rand() % 41];
 
 		cout << "   SLOT\n ________\n" << "| " << first << " " << second << " " << third << "  |\n" << " ---------"
 			<< "\n\n";
@@ -143,11 +147,11 @@ int Pelikone(int balance, int panos) {
 				break;
 			case 'W':
 				cout << "  $$$\nSuurvoitto!!\n  $$$\n";
-				balance = balance + 200 * panos - panos;
+				balance = balance + 150 * panos - panos;
 				break;
 			case 'X':
 				cout << "    $$$\nJackpot!!\n    $$$\n";
-				balance = balance + 400 * panos - panos;
+				balance = balance + 300 * panos - panos;
 			}
 		}
 		else {
@@ -162,25 +166,4 @@ int Pelikone(int balance, int panos) {
 		input = PelinJatkaminen(balance);
 	}
 	return(balance);
-}
-
-int Logo() {
-	cout << "VIEKKAUS OY\n\n";
-	cout << "PELAA VASTUULLISESTI\n\n\nSaat apua peliongelmiisi osoitteesta: peluuri.fi\n\n\n";
-
-	return(0);
-}
-
-
-//funktio palauttaa arvon sen mukaan, onko parametrinä annettu muuttuja numero. 
-bool NumeroTarkistus(int luku) {
-	char buffer[33];
-	int i = 0;
-	_itoa_s(luku, buffer, 10);
-	int len = strlen(buffer);
-	for (int i = 0; i < len; i++) {
-		if (!(isdigit(buffer[i])));
-		return(false);
-	}
-	return(true);
 }
