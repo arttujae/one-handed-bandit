@@ -7,7 +7,7 @@ using namespace std;
 
 
 //funktio varmistaa, ettei nimess‰ ole numeroita
-std:: string NimiTarkistus()
+ string NimiTarkistus()
 {
 	string name1;
 	int i = 0;
@@ -63,37 +63,33 @@ int PelinJatkaminen(int balance) {
 
 //Funktio tarkastaa onko syˆte numeraalinen, sek‰ varmistaa k‰ytt‰j‰n t‰ysi-ik‰isyyden
 int Ik‰Tarkistus() {
-	char age[10];
-	int age1, len;
+	char age_as_char[10];
+	int age_int, len;
 	int x = 1;
 	int i = 0;
 	while (x == 1) {
-		cin >> age;
-		age1 = atoi(age);
-		len = strlen(age);
-		while (isdigit(age[i])) {
+		cin >> age_as_char;
+		age_int = atoi(age_as_char);
+		len = strlen(age_as_char);
+		while (isdigit(age_as_char[i])) {
 			i++;
 			if (i == len) {
 				x++;
-			}
-		}
+			}}
 		if (x == 1)::cout << "Voit syˆtt‰‰ vain numeroita.\nSyˆt‰ ik‰ uudelleen: ";
-		i = 0;
-		
-			
+		i = 0;			
 	}
-	
-	
+
 	try {
-		if (age1 < 18) {
-			throw(age1);
+		if (age_int < 18) {
+			throw(age_int);
 		}
 	}
 	catch (int age1) {
 		cout << "\nVeikkaus Oy taikka elinkeinonharjoittaja tai yhteisˆ,\njoka v‰litt‰‰ rahapeleihin liittyvi‰ osallistumisilmoituksia ja -maksuja \ntai luovuttaa tilan raha-automaattien k‰ytett‰v‰n‰ pit‰miseen,\n ei saa antaa alle 18-vuotiaan pelata rahapelej‰.  \n\nSuomen arpajaislaki, kolmas luku, nelj‰stoista momentti.\n\n";
 		exit(0);
 	}
-	return(age1);
+	return(age_int);
 }
 //Funktiossa tarkistetaan asiakkaan nimi, ik‰ ja saldo. Funktio palauttaa saldon main-funktioon.
 int AsiakkaanTarkistus() {
@@ -111,9 +107,9 @@ int AsiakkaanTarkistus() {
 	age1 = Ik‰Tarkistus();
 	cout << "Talletettava summa, jonka haluat pelata: ";
 	cin >> deposit1;
-	struct Customer cust = { name1, age1, deposit1 };
+	struct Customer user = { name1, age1, deposit1 };
 
-	return(cust.deposit);
+	return(user.deposit);
 }
 
 //funktio toimii peliautomaattina, pit‰‰ kirjaa asiakkaan saldosta, ja palauttaa lopussa saldon. 
